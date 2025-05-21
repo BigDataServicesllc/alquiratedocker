@@ -52,7 +52,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setCurrentPage('login')}
-              className="hidden md:inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg"
+              className="hidden md:inline-block bg-blue-600 text-white font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
             >
               Iniciar sesión
             </button>
@@ -112,7 +112,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
                       setCurrentPage('login');
                       setIsMenuOpen(false);
                     }}
-                    className="w-full bg-blue-600 text-white text-center font-semibold px-4 py-3 rounded-xl shadow-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg"
+                    className="w-full bg-blue-600 text-white text-center font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
                   >
                     Iniciar sesión
                   </button>
