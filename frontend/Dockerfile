@@ -1,8 +1,12 @@
 # Etapa 1: build del proyecto
 FROM node:18 AS builder
 WORKDIR /app
+
+# Copiamos sólo los archivos de dependencias primero
 COPY package*.json ./
 RUN npm install
+
+# Luego copiamos el resto del código
 COPY . .
 RUN npm run build
 
