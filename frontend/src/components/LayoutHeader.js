@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LayoutHeader = ({ currentPage, setCurrentPage }) => {
+const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -51,7 +51,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
           {/* BOTÓN INICIAR SESIÓN + ÍCONO MENÚ MOBILE */}
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setCurrentPage('login')}
+              onClick={() => setShowLoginModal(true)} // <- abre el modal
               className="hidden md:inline-block bg-blue-600 text-white font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
             >
               Iniciar sesión
@@ -109,7 +109,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
                 <li>
                   <button
                     onClick={() => {
-                      setCurrentPage('login');
+                      setShowLoginModal(true); // <- abre el modal también desde mobile
                       setIsMenuOpen(false);
                     }}
                     className="w-full bg-blue-600 text-white text-center font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
