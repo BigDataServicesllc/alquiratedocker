@@ -12,7 +12,7 @@ const HomePage = ({ setCurrentPage }) => {
           className="text-center max-w-3xl mx-auto"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Tu aliado al alquilar
+            Tu aliado al alquilar.
           </h1>
           <p className="text-xl md:text-2xl mb-8">
             Calificá propiedades, consultá precios y decidí con datos reales.
