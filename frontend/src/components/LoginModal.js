@@ -6,11 +6,21 @@ const LoginModal = ({ onClose }) => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log("Usuario logueado:", user);
-        onClose(); // cerrar el modal después del login
+        console.log("✅ Usuario logueado:", user);
+
+        // Guardar datos del usuario en localStorage
+        localStorage.setItem("alquirateUser", JSON.stringify({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+        }));
+
+        onClose(); // Cierra el modal
+        window.location.reload(); // Refresca para que el header detecte login
       })
       .catch((error) => {
-        console.error("Error al iniciar sesión con Google:", error);
+        console.error("❌ Error al iniciar sesión con Google:", error);
       });
   };
 
@@ -26,7 +36,9 @@ const LoginModal = ({ onClose }) => {
         </button>
 
         {/* Título */}
-        <h2 className="text-3xl font-bold text-blue-600 mb-4">Alqui<span className="text-gray-800">Rate</span></h2>
+        <h2 className="text-3xl font-bold text-blue-600 mb-4">
+          Alqui<span className="text-gray-800">Rate</span>
+        </h2>
         <p className="text-lg text-gray-800 mb-2 font-semibold">¡Hola!</p>
         <p className="text-gray-600 mb-6 leading-relaxed">
           Ingresá a tu cuenta y compartí tu experiencia como inquilino y revisá las calificaciones de otros usuarios.
