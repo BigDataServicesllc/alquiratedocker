@@ -1,6 +1,19 @@
 import React from 'react';
+import { auth, googleProvider, signInWithPopup } from '../utils/firebase';
 
 const LoginModal = ({ onClose }) => {
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log("Usuario logueado:", user);
+        onClose(); // cerrar el modal después del login
+      })
+      .catch((error) => {
+        console.error("Error al iniciar sesión con Google:", error);
+      });
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-lg max-w-md w-full px-6 py-8 relative text-center">
@@ -40,7 +53,12 @@ const LoginModal = ({ onClose }) => {
 
         {/* Íconos sociales */}
         <div className="flex justify-center gap-6">
-          <img src="/icons/google.svg" alt="Google" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
+          <img
+            src="/icons/google.svg"
+            alt="Google"
+            className="w-8 h-8 cursor-pointer hover:scale-105 transition"
+            onClick={handleGoogleLogin}
+          />
           <img src="/icons/facebook.svg" alt="Facebook" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
           <img src="/icons/apple.svg" alt="Apple" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
         </div>
