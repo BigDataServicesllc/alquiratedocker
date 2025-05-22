@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-// No importamos currentUser ni lógica de login/perfil todavía
 
-const LayoutHeader = ({ currentPage, setCurrentPage }) => {
+const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -52,8 +51,8 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
           {/* BOTÓN INICIAR SESIÓN + ÍCONO MENÚ MOBILE */}
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setCurrentPage('login')}
-              className="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition"
+              onClick={() => setShowLoginModal(true)} // <- abre el modal
+              className="hidden md:inline-block bg-blue-600 text-white font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
             >
               Iniciar sesión
             </button>
@@ -62,8 +61,8 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
               onClick={toggleMenu}
               className="md:hidden text-gray-600 focus:outline-none"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
@@ -110,10 +109,10 @@ const LayoutHeader = ({ currentPage, setCurrentPage }) => {
                 <li>
                   <button
                     onClick={() => {
-                      setCurrentPage('login');
+                      setShowLoginModal(true); // <- abre el modal también desde mobile
                       setIsMenuOpen(false);
                     }}
-                    className="block w-full text-left px-2 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
+                    className="w-full bg-blue-600 text-white text-center font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
                   >
                     Iniciar sesión
                   </button>
