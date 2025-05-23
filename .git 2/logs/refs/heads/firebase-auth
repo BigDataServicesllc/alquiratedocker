@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 7e786fef203d0fc5a639a23a07969c9cff90ef4d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747875741 -0300	branch: Created from HEAD
+7e786fef203d0fc5a639a23a07969c9cff90ef4d c369408de5ced714568cde1a0fc378f990de0fc3 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876398 -0300	reset: moving to HEAD~1
+c369408de5ced714568cde1a0fc378f990de0fc3 c90445bddd79d191529e0553bc337e6e8db91dfd Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876835 -0300	reset: moving to HEAD~1
+c90445bddd79d191529e0553bc337e6e8db91dfd f862e5ed70e531328b22961ba9dc5d679c9ebd09 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876850 -0300	commit: Configura Firebase usando variables de entorno

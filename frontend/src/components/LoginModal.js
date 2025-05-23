@@ -1,5 +1,6 @@
 import React from 'react';
 import { auth, googleProvider, signInWithPopup } from '../utils/firebase';
+import EmailLogin from './EmailLogin';
 
 const LoginModal = ({ onClose }) => {
   const handleGoogleLogin = () => {
@@ -44,17 +45,8 @@ const LoginModal = ({ onClose }) => {
           Ingresá a tu cuenta y compartí tu experiencia como inquilino y revisá las calificaciones de otros usuarios.
         </p>
 
-        {/* Campo Email */}
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-
-        {/* Botón Continuar */}
-        <button className="w-full bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition">
-          Continuar
-        </button>
+        {/* Email login (con contraseña o con link) */}
+        <EmailLogin />
 
         {/* Separador */}
         <div className="my-6 flex items-center justify-center text-sm text-gray-500">

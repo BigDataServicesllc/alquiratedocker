@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 6274ffb9e721555b219188953067362a6739f58d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747857361 -0300	commit (initial): Agrego carpeta frontend al proyecto principal
+6274ffb9e721555b219188953067362a6739f58d e8c0a1ab6ed919ddccff76e3e6ca699b1fc4aaef Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747857958 -0300	commit: fix: primer push
+e8c0a1ab6ed919ddccff76e3e6ca699b1fc4aaef abd986eac67c122285050edbb6a6048985e1dd4a Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747858672 -0300	commit: Elimino archivos mal creados por error de nombre
+abd986eac67c122285050edbb6a6048985e1dd4a 8b152863e17caabea96412f590bc11305719cd90 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747863801 -0300	commit: Corrijo submódulo y agrego carpeta frontend con Dockerfile
+8b152863e17caabea96412f590bc11305719cd90 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747864402 -0300	commit: Corrijo estructura y subo Dockerfile + dependencias
