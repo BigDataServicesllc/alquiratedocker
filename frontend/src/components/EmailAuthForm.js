@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import {
   auth,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from '../utils/firebase';
+import { sendEmailVerification } from 'firebase/auth';
 
 const EmailAuthForm = () => {
-  const [mode, setMode] = useState('login'); // 'login' o 'register'
+  const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,8 +22,20 @@ const EmailAuthForm = () => {
         return;
       }
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert('Cuenta creada correctamente.');
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const user = result.user;
+
+        // Enviar correo de verificación
+        await sendEmailVerification(user);
+
+        alert('Cuenta creada correctamente. Revisá tu correo para verificar tu cuenta.');
+
+        localStorage.setItem("alquirateUser", JSON.stringify({
+          uid: user.uid,
+          email: user.email
+        }));
+
+        window.location.reload();
       } catch (err) {
         console.error(err);
         setError('Error al registrar usuario.');
@@ -31,6 +44,10 @@ const EmailAuthForm = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         alert('Inicio de sesión exitoso.');
+
+        localStorage.setItem("alquirateUser", JSON.stringify({ email }));
+
+        window.location.reload();
       } catch (err) {
         console.error(err);
         setError('Email o contraseña incorrectos.');
