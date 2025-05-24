@@ -50,46 +50,44 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
             <button onClick={() => setCurrentPage('addReview')} className={`text-gray-600 hover:text-blue-600 transition-colors ${currentPage === 'addReview' ? 'font-semibold text-blue-600' : ''}`}>Calificar</button>
 
             {user ? (
-              <div
-                className="relative group"
-                ref={menuRef}
-                onMouseEnter={() => setShowUserMenu(true)}
-                onMouseLeave={() => setShowUserMenu(false)}
-              >
+              <div className="relative" ref={menuRef}>
                 <img
                   src={avatarSrc}
                   alt="avatar"
-                  className="w-9 h-9 rounded-full cursor-pointer border border-gray-300 transition hover:scale-105"
+                  className="w-9 h-9 rounded-full cursor-pointer border border-gray-300 hover:shadow-md transition"
                   onClick={toggleUserMenu}
                 />
                 <div
-                  className={`absolute right-0 mt-2 w-48 bg-white border rounded-xl shadow-lg text-sm text-gray-700 z-50 transition-all duration-200 ${
+                  className={`absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded-xl shadow-lg text-sm z-50 transition-all duration-200 ${
                     showUserMenu ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
                   }`}
                 >
+                  <div className="px-4 py-3 border-b text-gray-800">
+                    <p className="font-medium truncate">{user.email}</p>
+                  </div>
                   <button
                     onClick={() => {
                       setCurrentPage('myReviews');
                       setShowUserMenu(false);
                     }}
-                    className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-left"
                   >
-                    📄 Ver mis calificaciones
+                    <span className="text-lg">📄</span> Ver mis calificaciones
                   </button>
                   <button
                     onClick={() => {
                       setCurrentPage('rankings');
                       setShowUserMenu(false);
                     }}
-                    className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-left"
                   >
-                    🔍 Ver calificaciones
+                    <span className="text-lg">🔍</span> Ver calificaciones
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="block px-4 py-2 text-red-600 hover:bg-gray-100 w-full text-left"
+                    className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-gray-100 w-full text-left"
                   >
-                    🚪 Cerrar sesión
+                    <span className="text-lg">🚪</span> Cerrar sesión
                   </button>
                 </div>
               </div>
@@ -144,24 +142,27 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
               </button>
 
               {user ? (
-                <>
-                  <div className="mt-4 text-sm text-gray-500">{user.email}</div>
+                <div className="mt-6 px-4 text-left">
+                  <div className="flex items-center gap-3 mb-3">
+                    <img src={avatarSrc} alt="avatar" className="w-10 h-10 rounded-full border" />
+                    <div className="text-sm text-gray-800 truncate">{user.email}</div>
+                  </div>
                   <button
                     onClick={() => {
                       setCurrentPage('myReviews');
                       setIsMenuOpen(false);
                     }}
-                    className="text-sm text-gray-700 hover:underline"
+                    className="text-sm text-gray-700 w-full text-left py-2 hover:underline"
                   >
                     📄 Ver mis calificaciones
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="text-red-600 text-sm mt-2 hover:underline"
+                    className="text-red-600 text-sm w-full text-left py-2 hover:underline"
                   >
                     🚪 Cerrar sesión
                   </button>
-                </>
+                </div>
               ) : (
                 <button
                   onClick={() => {
