@@ -32,7 +32,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
   const avatarSrc = user?.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user?.email || 'user')}`;
 
   return (
-    <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-10">
+    <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <h1
@@ -107,39 +107,42 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t pt-4">
-            <nav className="flex flex-col gap-4 text-left px-4">
-              <div className="space-y-2">
-                <button onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'home' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Inicio</button>
-                <button onClick={() => { setCurrentPage('rankings'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'rankings' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Rankings</button>
-                <button onClick={() => { setCurrentPage('addReview'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'addReview' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Calificar</button>
-              </div>
-
-              {user && (
-                <div className="mt-6 border-t pt-4 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <img src={avatarSrc} alt="avatar" className="w-10 h-10 rounded-full border" />
-                    <p className="text-sm text-gray-800 truncate">{user.email}</p>
-                  </div>
-                  <button onClick={() => { setCurrentPage('myReviews'); setIsMenuOpen(false); }} className="text-gray-700 text-base flex items-center gap-2">
-                    📄 Ver mis calificaciones
-                  </button>
-                  <button onClick={() => { setCurrentPage('rankings'); setIsMenuOpen(false); }} className="text-gray-700 text-base flex items-center gap-2">
-                    🔍 Ver calificaciones
-                  </button>
-                  <button onClick={handleLogout} className="text-red-600 text-base flex items-center gap-2">
-                    🚪 Cerrar sesión
-                  </button>
+          <>
+            <div className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"></div>
+            <div className="md:hidden mt-4 pb-4 border-t pt-4 relative z-50 bg-white rounded-b-xl">
+              <nav className="flex flex-col gap-4 text-left px-4">
+                <div className="space-y-2">
+                  <button onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'home' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Inicio</button>
+                  <button onClick={() => { setCurrentPage('rankings'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'rankings' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Rankings</button>
+                  <button onClick={() => { setCurrentPage('addReview'); setIsMenuOpen(false); }} className={`block text-base ${currentPage === 'addReview' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}>Calificar</button>
                 </div>
-              )}
 
-              {!user && (
-                <button onClick={() => { setShowLoginModal(true); setIsMenuOpen(false); }} className="mt-6 bg-blue-600 text-white text-center font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition">
-                  Iniciar sesión
-                </button>
-              )}
-            </nav>
-          </div>
+                {user && (
+                  <div className="mt-6 border-t pt-4 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <img src={avatarSrc} alt="avatar" className="w-10 h-10 rounded-full border" />
+                      <p className="text-sm text-gray-800 truncate">{user.email}</p>
+                    </div>
+                    <button onClick={() => { setCurrentPage('myReviews'); setIsMenuOpen(false); }} className="text-gray-700 text-base flex items-center gap-2">
+                      📄 Ver mis calificaciones
+                    </button>
+                    <button onClick={() => { setCurrentPage('rankings'); setIsMenuOpen(false); }} className="text-gray-700 text-base flex items-center gap-2">
+                      🔍 Ver calificaciones
+                    </button>
+                    <button onClick={handleLogout} className="text-red-600 text-base flex items-center gap-2">
+                      🚪 Cerrar sesión
+                    </button>
+                  </div>
+                )}
+
+                {!user && (
+                  <button onClick={() => { setShowLoginModal(true); setIsMenuOpen(false); }} className="mt-6 bg-blue-600 text-white text-center font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition">
+                    Iniciar sesión
+                  </button>
+                )}
+              </nav>
+            </div>
+          </>
         )}
       </div>
     </header>
