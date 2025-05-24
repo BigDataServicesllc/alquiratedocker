@@ -1,0 +1,27 @@
+0000000000000000000000000000000000000000 6274ffb9e721555b219188953067362a6739f58d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747857361 -0300	commit (initial): Agrego carpeta frontend al proyecto principal
+6274ffb9e721555b219188953067362a6739f58d e8c0a1ab6ed919ddccff76e3e6ca699b1fc4aaef Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747857958 -0300	commit: fix: primer push
+e8c0a1ab6ed919ddccff76e3e6ca699b1fc4aaef abd986eac67c122285050edbb6a6048985e1dd4a Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747858672 -0300	commit: Elimino archivos mal creados por error de nombre
+abd986eac67c122285050edbb6a6048985e1dd4a 8b152863e17caabea96412f590bc11305719cd90 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747863801 -0300	commit: Corrijo submódulo y agrego carpeta frontend con Dockerfile
+8b152863e17caabea96412f590bc11305719cd90 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747864402 -0300	commit: Corrijo estructura y subo Dockerfile + dependencias
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747865841 -0300	checkout: moving from main to dev
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747865891 -0300	checkout: moving from dev to feature/login-google
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747868209 -0300	checkout: moving from feature/login-google to dev
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747868730 -0300	checkout: moving from dev to feature/login-button
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6683728241034ebdd9bacb546f8ad2d259d187c2 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747868748 -0300	commit: Agrego botón de inicio de sesión al header
+6683728241034ebdd9bacb546f8ad2d259d187c2 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747868778 -0300	checkout: moving from feature/login-button to dev
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6683728241034ebdd9bacb546f8ad2d259d187c2 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747868783 -0300	merge feature/login-button: Fast-forward
+6683728241034ebdd9bacb546f8ad2d259d187c2 6683728241034ebdd9bacb546f8ad2d259d187c2 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747869517 -0300	checkout: moving from dev to dev
+6683728241034ebdd9bacb546f8ad2d259d187c2 bbcc7fd14298c65aaef1059bae017e206763f313 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747869689 -0300	commit: Restaura LayoutHeader con botón de inicio de sesión
+bbcc7fd14298c65aaef1059bae017e206763f313 086243987c879439865581ffb40be74bdddec7c1 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747870118 -0300	commit: Mejora estilo del botón Iniciar sesión (desktop + mobile)
+086243987c879439865581ffb40be74bdddec7c1 c90445bddd79d191529e0553bc337e6e8db91dfd Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747871073 -0300	commit: Mejora estilo del botón Iniciar sesión (desktop + mobile) v2
+c90445bddd79d191529e0553bc337e6e8db91dfd c369408de5ced714568cde1a0fc378f990de0fc3 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747872703 -0300	commit: Agregar modal
+c369408de5ced714568cde1a0fc378f990de0fc3 c369408de5ced714568cde1a0fc378f990de0fc3 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747875072 -0300	checkout: moving from dev to dev
+c369408de5ced714568cde1a0fc378f990de0fc3 7e786fef203d0fc5a639a23a07969c9cff90ef4d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747875093 -0300	commit: Configuración inicio sesion con google
+7e786fef203d0fc5a639a23a07969c9cff90ef4d 7e786fef203d0fc5a639a23a07969c9cff90ef4d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747875173 -0300	checkout: moving from dev to feature/firebase-auth
+7e786fef203d0fc5a639a23a07969c9cff90ef4d 7e786fef203d0fc5a639a23a07969c9cff90ef4d Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747875741 -0300	checkout: moving from feature/firebase-auth to firebase-auth
+7e786fef203d0fc5a639a23a07969c9cff90ef4d c369408de5ced714568cde1a0fc378f990de0fc3 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876398 -0300	reset: moving to HEAD~1
+c369408de5ced714568cde1a0fc378f990de0fc3 c90445bddd79d191529e0553bc337e6e8db91dfd Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876835 -0300	reset: moving to HEAD~1
+c90445bddd79d191529e0553bc337e6e8db91dfd f862e5ed70e531328b22961ba9dc5d679c9ebd09 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876850 -0300	commit: Configura Firebase usando variables de entorno
+f862e5ed70e531328b22961ba9dc5d679c9ebd09 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747876993 -0300	checkout: moving from firebase-auth to main
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747877015 -0300	checkout: moving from main to dev
+6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 6d86989b8bbbd15d0ebe474f67cbc4071c5fd979 Michael Ortiz <michaelortiz@MacBookPro.fibertel.com.ar> 1747877226 -0300	checkout: moving from dev to dev
