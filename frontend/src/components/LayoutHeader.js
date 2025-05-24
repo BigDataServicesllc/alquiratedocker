@@ -34,7 +34,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
     ? user.photoURL
     : user?.email
       ? `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.email)}`
-      : null;
+      : 'https://ui-avatars.com/api/?name=User';
 
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-10">
