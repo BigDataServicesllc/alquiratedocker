@@ -29,6 +29,8 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
     window.location.reload();
   };
 
+  const avatarSrc = user?.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user?.email || 'user')}`;
+
   return (
     <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-10">
       <div className="container mx-auto px-4 py-3">
@@ -61,9 +63,9 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
             {user ? (
               <div className="relative" ref={menuRef}>
                 <img
-                  src={user.photoURL}
+                  src={avatarSrc}
                   alt="avatar"
-                  className="w-9 h-9 rounded-full cursor-pointer"
+                  className="w-9 h-9 rounded-full cursor-pointer border border-gray-300"
                   onClick={toggleUserMenu}
                 />
                 {showUserMenu && (
