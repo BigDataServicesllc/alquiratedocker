@@ -1,13 +1,14 @@
+// /frontend/src/components/LoginModal.js
 import React from 'react';
-import { auth, googleProvider, signInWithPopup } from '../utils/firebase';
-import EmailAuthForm from './EmailAuthForm'; // 👈 nuevo
+import { auth, googleProvider } from '../utils/firebase';
+import { signInWithPopup } from 'firebase/auth';
+import EmailAuthForm from './EmailAuthForm';
 
 const LoginModal = ({ onClose }) => {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log("✅ Usuario logueado:", user);
 
         localStorage.setItem("alquirateUser", JSON.stringify({
           uid: user.uid,
@@ -42,7 +43,6 @@ const LoginModal = ({ onClose }) => {
           Ingresá a tu cuenta y compartí tu experiencia como inquilino y revisá las calificaciones de otros usuarios.
         </p>
 
-        {/* Nuevo formulario login/registro */}
         <EmailAuthForm />
 
         <div className="my-6 flex items-center justify-center text-sm text-gray-500">
@@ -58,8 +58,18 @@ const LoginModal = ({ onClose }) => {
             className="w-8 h-8 cursor-pointer hover:scale-105 transition"
             onClick={handleGoogleLogin}
           />
-          <img src="/icons/facebook.svg" alt="Facebook" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
-          <img src="/icons/apple.svg" alt="Apple" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
+          <img
+            src="/icons/facebook.svg"
+            alt="Facebook"
+            className="w-8 h-8 cursor-pointer hover:scale-105 transition opacity-50 cursor-not-allowed"
+            title="Próximamente"
+          />
+          <img
+            src="/icons/apple.svg"
+            alt="Apple"
+            className="w-8 h-8 cursor-pointer hover:scale-105 transition opacity-50 cursor-not-allowed"
+            title="Próximamente"
+          />
         </div>
       </div>
     </div>
