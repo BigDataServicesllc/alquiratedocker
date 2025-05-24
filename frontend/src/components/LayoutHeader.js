@@ -108,7 +108,7 @@ const LayoutHeader = ({ currentPage, setCurrentPage, setShowLoginModal }) => {
 
         {isMenuOpen && (
           <>
-            <div className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"></div>
+            <div className="fixed inset-0 bg-white/30 backdrop-blur-sm z-40 md:hidden"></div>
             <div className="md:hidden mt-4 pb-4 border-t pt-4 relative z-50 bg-white rounded-b-xl">
               <nav className="flex flex-col gap-4 text-left px-4">
                 <div className="space-y-2">
