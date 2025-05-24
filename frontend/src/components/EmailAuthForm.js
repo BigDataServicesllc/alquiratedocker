@@ -1,98 +1,99 @@
 import React, { useState } from 'react';
+import { auth } from '../utils/firebase';
 import {
-  auth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from '../utils/firebase';
-import { sendEmailVerification } from 'firebase/auth';
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword
+} from 'firebase/auth';
+import CustomToast from './CustomToast';
 
 const EmailAuthForm = () => {
   const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [confirm, setConfirm] = useState('');
+  const [error, setError] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
-  const handleSubmit = async () => {
-    setError(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
     if (mode === 'register') {
-      if (password !== confirmPassword) {
+      if (password !== confirm) {
         setError('Las contraseñas no coinciden.');
         return;
       }
+
       try {
         const result = await createUserWithEmailAndPassword(auth, email, password);
-        const user = result.user;
-
-        // Enviar correo de verificación
-        await sendEmailVerification(user);
-
-        alert('Cuenta creada correctamente. Revisá tu correo para verificar tu cuenta.');
+        await sendEmailVerification(result.user);
 
         localStorage.setItem("alquirateUser", JSON.stringify({
-          uid: user.uid,
-          email: user.email
+          uid: result.user.uid,
+          email: result.user.email
         }));
 
-        window.location.reload();
+        setShowToast(true);
+        setEmail('');
+        setPassword('');
+        setConfirm('');
       } catch (err) {
-        console.error(err);
-        setError('Error al registrar usuario.');
+        console.error("❌ Error al registrar usuario:", err);
+        setError('No se pudo crear la cuenta.');
       }
     } else {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert('Inicio de sesión exitoso.');
-
-        localStorage.setItem("alquirateUser", JSON.stringify({ email }));
-
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        localStorage.setItem("alquirateUser", JSON.stringify({
+          uid: result.user.uid,
+          email: result.user.email
+        }));
         window.location.reload();
       } catch (err) {
-        console.error(err);
+        console.error("❌ Error al iniciar sesión:", err);
         setError('Email o contraseña incorrectos.');
       }
     }
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <input
-        type="email"
-        className="w-full p-3 border border-gray-300 rounded-lg mb-4"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <input
-        type="password"
-        className="w-full p-3 border border-gray-300 rounded-lg mb-4"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      {mode === 'register' && (
+    <>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <input
+          type="email"
+          value={email}
+          placeholder="Correo electrónico"
+          onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+          required
+        />
         <input
           type="password"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4"
-          placeholder="Confirmar contraseña"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={password}
+          placeholder="Contraseña"
+          onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+          required
         />
-      )}
-
-      {error && (
-        <div className="text-red-600 mb-2 text-sm">{error}</div>
-      )}
-
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl mb-2"
-      >
-        {mode === 'login' ? 'Iniciar sesión' : 'Registrarse'}
-      </button>
+        {mode === 'register' && (
+          <input
+            type="password"
+            value={confirm}
+            placeholder="Confirmar contraseña"
+            onChange={(e) => setConfirm(e.target.value)}
+            className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+            required
+          />
+        )}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button
+          type="submit"
+          className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition"
+        >
+          {mode === 'login' ? 'Iniciar sesión' : 'Registrarse'}
+        </button>
+      </form>
 
       <p className="text-sm text-gray-600 mt-3">
         {mode === 'login' ? (
@@ -117,7 +118,16 @@ const EmailAuthForm = () => {
           </>
         )}
       </p>
-    </div>
+
+      <CustomToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        message={{
+          title: 'Cuenta creada correctamente',
+          body: 'Revisá tu correo para verificar tu cuenta.',
+        }}
+      />
+    </>
   );
 };
 
