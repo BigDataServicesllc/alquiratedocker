@@ -15,6 +15,27 @@ const EmailAuthForm = () => {
   const [error, setError] = useState('');
   const [showToast, setShowToast] = useState(false);
 
+  const handleRegister = async () => {
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(result.user);
+
+      localStorage.setItem("alquirateUser", JSON.stringify({
+        uid: result.user.uid,
+        email: result.user.email
+      }));
+
+      setShowToast(true);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } catch (err) {
+      console.error("❌ Error al registrar usuario:", err);
+      setError('No se pudo crear la cuenta.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -24,24 +45,7 @@ const EmailAuthForm = () => {
         setError('Las contraseñas no coinciden.');
         return;
       }
-
-      try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
-        await sendEmailVerification(result.user);
-
-        localStorage.setItem("alquirateUser", JSON.stringify({
-          uid: result.user.uid,
-          email: result.user.email
-        }));
-
-        setShowToast(true);
-        setEmail('');
-        setPassword('');
-        setConfirm('');
-      } catch (err) {
-        console.error("❌ Error al registrar usuario:", err);
-        setError('No se pudo crear la cuenta.');
-      }
+      await handleRegister();
     } else {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
