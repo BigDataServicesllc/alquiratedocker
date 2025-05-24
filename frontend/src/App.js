@@ -4,7 +4,8 @@ import LayoutFooter from './components/LayoutFooter';
 import HomePage from './components/HomePage';
 import RankingsPage from './components/RankingsPage';
 import AddReviewPage from './components/AddReviewPage';
-import LoginModal from './components/LoginModal'; // <- Modal importado
+import LoginModal from './components/LoginModal';
+import ProfilePage from './components/ProfilePage'; // ✅ nuevo import
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,6 +19,8 @@ const App = () => {
         return <RankingsPage />;
       case 'addReview':
         return <AddReviewPage onAddReview={(data) => console.log('Review data:', data)} />;
+      case 'profile':
+        return <ProfilePage />; // ✅ nueva ruta
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
     }
@@ -28,14 +31,12 @@ const App = () => {
       <LayoutHeader
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        setShowLoginModal={setShowLoginModal} // <- agregado aquí correctamente
+        setShowLoginModal={setShowLoginModal}
       />
       <main className="flex-grow">
         {renderPage()}
       </main>
       <LayoutFooter />
-
-      {/* Modal de Login */}
       {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
     </div>
   );
