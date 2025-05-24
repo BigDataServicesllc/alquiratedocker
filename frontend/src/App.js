@@ -4,7 +4,7 @@ import LayoutFooter from './components/LayoutFooter';
 import HomePage from './components/HomePage';
 import RankingsPage from './components/RankingsPage';
 import AddReviewPage from './components/AddReviewPage';
-import LoginModal from './components/LoginModal'; // <- Modal importado
+import LoginModal from './components/LoginModal';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -15,9 +15,14 @@ const App = () => {
       case 'home':
         return <HomePage setCurrentPage={setCurrentPage} />;
       case 'rankings':
-        return <RankingsPage />;
+        return <RankingsPage setCurrentPage={setCurrentPage} />;
       case 'addReview':
-        return <AddReviewPage onAddReview={(data) => console.log('Review data:', data)} />;
+        return (
+          <AddReviewPage
+            setCurrentPage={setCurrentPage}
+            onAddReview={(data) => console.log('Review data:', data)}
+          />
+        );
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
     }
@@ -28,15 +33,21 @@ const App = () => {
       <LayoutHeader
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        setShowLoginModal={setShowLoginModal} // <- agregado aquí correctamente
+        setShowLoginModal={setShowLoginModal}
       />
+
       <main className="flex-grow">
         {renderPage()}
       </main>
+
       <LayoutFooter />
 
-      {/* Modal de Login */}
-      {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
+      {showLoginModal && (
+        <LoginModal
+          onClose={() => setShowLoginModal(false)}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 };

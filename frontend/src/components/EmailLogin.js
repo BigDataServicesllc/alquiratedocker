@@ -9,8 +9,20 @@ import {
   createUserWithEmailAndPassword,
 } from '../utils/firebase';
 
-const EmailLogin = () => {
+const EmailLogin = ({ onSuccess }) => {
   const [email, setEmail] = useState('');
+
+  const defaultPassword = 'alquirateDefault';
+
+  const finishLogin = (user) => {
+    localStorage.setItem("alquirateUser", JSON.stringify({
+      uid: user.uid,
+      email: user.email
+    }));
+    if (onSuccess) {
+      onSuccess(); // cerrar modal y redirigir a home
+    }
+  };
 
   const handleLoginLink = async () => {
     try {
@@ -23,15 +35,16 @@ const EmailLogin = () => {
   };
 
   const handleLoginWithPassword = async () => {
-    const defaultPassword = 'alquirateDefault';
     try {
-      await signInWithEmailAndPassword(auth, email, defaultPassword);
+      const result = await signInWithEmailAndPassword(auth, email, defaultPassword);
       console.log('Sesión iniciada');
+      finishLogin(result.user);
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         try {
-          await createUserWithEmailAndPassword(auth, email, defaultPassword);
+          const newUser = await createUserWithEmailAndPassword(auth, email, defaultPassword);
           console.log('Usuario creado y logueado');
+          finishLogin(newUser.user);
         } catch (createErr) {
           console.error('Error creando usuario:', createErr);
         }
@@ -46,7 +59,8 @@ const EmailLogin = () => {
       const savedEmail = window.localStorage.getItem('emailForSignIn') || window.prompt('Ingresá tu correo');
       signInWithEmailLink(auth, savedEmail, window.location.href)
         .then((result) => {
-          console.log('Login por link exitoso:', result.user);
+          console.log('Login por link exitoso');
+          finishLogin(result.user);
         })
         .catch((error) => {
           console.error('Error en login por link:', error);
