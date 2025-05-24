@@ -1,69 +1,86 @@
-import React from 'react';
-import { auth, googleProvider, signInWithPopup } from '../utils/firebase';
-import EmailAuthForm from './EmailAuthForm'; // 👈 nuevo
+// /frontend/src/components/EmailAuthForm.js
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth } from '../utils/firebase';
+import CustomToast from './CustomToast';
 
-const LoginModal = ({ onClose }) => {
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const user = result.user;
-        console.log("✅ Usuario logueado:", user);
+const EmailAuthForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-        localStorage.setItem("alquirateUser", JSON.stringify({
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-        }));
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
 
-        onClose();
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error("❌ Error al iniciar sesión con Google:", error);
-      });
+    if (password !== confirm) {
+      setErrorMsg('Las contraseñas no coinciden.');
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(userCredential.user);
+      setShowToast(true);
+      setEmail('');
+      setPassword('');
+      setConfirm('');
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      setErrorMsg(error.message);
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full px-6 py-8 relative text-center">
+    <>
+      <form className="flex flex-col gap-3" onSubmit={handleRegister}>
+        <input
+          type="email"
+          value={email}
+          placeholder="Correo electrónico"
+          onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+          required
+        />
+        <input
+          type="password"
+          value={password}
+          placeholder="Contraseña"
+          onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+          required
+        />
+        <input
+          type="password"
+          value={confirm}
+          placeholder="Confirmar contraseña"
+          onChange={(e) => setConfirm(e.target.value)}
+          className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+          required
+        />
+
+        {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
+
         <button
-          onClick={onClose}
-          className="absolute top-3 left-4 text-gray-600 text-sm hover:text-gray-800"
+          type="submit"
+          className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition"
         >
-          ← Atrás
+          Registrarse
         </button>
+      </form>
 
-        <h2 className="text-3xl font-bold text-blue-600 mb-4">
-          Alqui<span className="text-gray-800">Rate</span>
-        </h2>
-        <p className="text-lg text-gray-800 mb-2 font-semibold">¡Hola!</p>
-        <p className="text-gray-600 mb-6 leading-relaxed">
-          Ingresá a tu cuenta y compartí tu experiencia como inquilino y revisá las calificaciones de otros usuarios.
-        </p>
-
-        {/* Nuevo formulario login/registro */}
-        <EmailAuthForm />
-
-        <div className="my-6 flex items-center justify-center text-sm text-gray-500">
-          <hr className="flex-grow border-t border-gray-300 mx-2" />
-          o ingresá con
-          <hr className="flex-grow border-t border-gray-300 mx-2" />
-        </div>
-
-        <div className="flex justify-center gap-6">
-          <img
-            src="/icons/google.svg"
-            alt="Google"
-            className="w-8 h-8 cursor-pointer hover:scale-105 transition"
-            onClick={handleGoogleLogin}
-          />
-          <img src="/icons/facebook.svg" alt="Facebook" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
-          <img src="/icons/apple.svg" alt="Apple" className="w-8 h-8 cursor-pointer hover:scale-105 transition" />
-        </div>
-      </div>
-    </div>
+      <CustomToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        message={{
+          title: 'Cuenta creada correctamente',
+          body: 'Revisá tu correo para verificar tu cuenta.',
+        }}
+      />
+    </>
   );
 };
 
-export default LoginModal;
+export default EmailAuthForm;
